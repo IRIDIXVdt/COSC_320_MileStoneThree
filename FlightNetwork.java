@@ -23,5 +23,9 @@ public class FlightNetwork {
    public static void AlgorithmAforFlightNetwork(ArrayList<LinkedList<Node>> FlightMap, Node ini, Node fin){
       //yet to be filled
    }
+
+   public static LinkedList<Node>[] RandomMapGenerator(int size){
+      return null;
+   }
    
 }
