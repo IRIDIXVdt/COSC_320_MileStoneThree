@@ -27,19 +27,19 @@ public class USC{
 			}
 		}
 		System.out.println("initial frontier: "); //test
-		frontier.forEach((a)->System.out.println("(node,cost): (" + a.nodeIndex + "," + a.cost + ")")); //test
+		frontier.forEach((a)->System.out.println("(node,cost): (" + a.nodeIndex + "," + a.getCost() + ")")); //test
 		while(true) {
 			Node branch = frontier.poll(); 
 			if(branch.nodeIndex == finalState) {
 				results.add(branch);
 				Node newNode = frontier.peek();
-					while(newNode != null && newNode.nodeIndex == finalState && newNode.cost == branch.cost) {
+					while(newNode != null && newNode.nodeIndex == finalState && newNode.getCost() == branch.getCost()) {
 						results.add(frontier.poll());
 						newNode = frontier.peek();
 					}
 				return results;
 			}
-		System.out.println("branch to continue: ("+ branch.nodeIndex+","+branch.cost + ")" + "\n"); //test
+		System.out.println("branch to continue: ("+ branch.nodeIndex+","+branch.getCost() + ")" + "\n"); //test
 		updateFrontier(branch);	
 		}
 	}
@@ -48,18 +48,18 @@ public class USC{
 	public void updateFrontier(Node branch) {
 		for(int i = 0; i < ver; i++) {
 			if(map[branch.nodeIndex][i] > 0) {
-				Node x = new Node (i, branch.cost + map[branch.nodeIndex][i], branch.path + " -> " + i);
+				Node x = new Node (i, branch.getCost() + map[branch.nodeIndex][i], branch.path + " -> " + i);
 				frontier.add(x);
 			}
 		}
 		System.out.println("New Branches: "); //test
-		frontier.forEach((a)->System.out.println("(node,cost:) ("+a.nodeIndex+","+a.cost + ")")); //test
+		frontier.forEach((a)->System.out.println("(node,cost:) ("+a.nodeIndex+","+a.getCost() + ")")); //test
 	}
 	
 	public void userInput(int s, int e) {
 		List<Node> results = this.search(s, e);
 		for(Node result : results) {
-			System.out.println("Total Cost: " + result.cost + "\n" + "Total Path: "+ result.path);
+			System.out.println("Total Cost: " + result.getCost() + "\n" + "Total Path: "+ result.path);
 		}
 	}
 

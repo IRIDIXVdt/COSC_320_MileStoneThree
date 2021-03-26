@@ -11,11 +11,15 @@ public class Node implements Comparable<Node>{
 	public Node(int nodeIndex, double monetaryCost, double waitTimeCost, double flightTimeCost, String path){
 	//we would use this constructor for most of the time
 		this.nodeIndex = nodeIndex;
-		this.monetaryCost = monetaryCost;
-		this.waitTimeCost = waitTimeCost;
-		this.flightTimeCost = flightTimeCost;
+		setMonetaryCost(monetaryCost);
+		setWaitTimeCost(waitTimeCost);
+		setFlightTimeCost(flightTimeCost);
 		this.path = path;
+		setX1(1);
+		setX2(0);
+		setX3(0);
 	}
+
 	public double getCost(){
 		//this provides a cost to a node
 		//p = x1*f1 + x2*f2 + x3*f3
@@ -44,20 +48,30 @@ public class Node implements Comparable<Node>{
 	}
 
 	public int compareTo(Node o) {
-		if(this.cost < o.cost) {
+		if(this.getCost() < o.getCost()) {
 			return -1;
 		} else{
 			return 1;
 		} 
 	}
 
-	
-	
 	public boolean equals(Object obj) {
 		Node x = (Node) obj;
-		if(x.nodeIndex == this.nodeIndex && x.cost == this.cost) {
+		if(x.nodeIndex == this.nodeIndex && x.getCost() == this.getCost()) {
 			return true;
 		}
 		return false;
+	}
+
+	private void setFlightTimeCost(double flightTimeCost2) {
+		this.flightTimeCost = flightTimeCost2>0?flightTimeCost2:0;
+	}
+
+	private void setWaitTimeCost(double waitTimeCost2) {
+		this.waitTimeCost = waitTimeCost2>0?waitTimeCost2:0;
+	}
+
+	private void setMonetaryCost(double monetaryCost2) {
+		this.monetaryCost = monetaryCost2>0?monetaryCost2:0;
 	}
 }
