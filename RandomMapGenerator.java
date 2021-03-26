@@ -8,9 +8,10 @@ public class RandomMapGenerator {
     public RandomMapGenerator(int size){
         //notice that this is merely a graph of costs, so we do not have to obey any kind of triangular inequality
         PathCostGraph = new LinkedList[size];
-        for(int i = 0 ; i< size ; i++)//now we initialize an array of linkedlists
+        for(int i = 0 ; i< size ; i++){//now we initialize an array of linkedlists
             PathCostGraph[i] = new LinkedList<Node>();
             PathCostGraph[i].add(getRandomCostNode(i,80,0,0));
+        }
         for(int i = 0; i< size; i++){
             int pair = i == size ? 0 : i+1;
             //we want to make sure there would be a sol'n
@@ -52,6 +53,17 @@ public class RandomMapGenerator {
 
     public LinkedList<Node> getList(){
         return null;
+    }
+
+    public String toString(){
+        //we would like to print the graph
+        String r = "";
+        for(LinkedList<Node> n :PathCostGraph){
+            for(Node i: n)
+                r += i.getIndex()+", ";
+            r+="\n";
+        }
+        return r;
     }
     
 }
