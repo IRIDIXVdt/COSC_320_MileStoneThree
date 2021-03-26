@@ -1,4 +1,4 @@
-package Project;
+
 
 public class Node implements Comparable<Node>{
 	public int nodeIndex;
