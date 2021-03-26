@@ -13,7 +13,7 @@ public class RandomMapGenerator {
             PathCostGraph[i].add(getRandomCostNode(i,80,0,0));
         }
         for(int i = 0; i< size; i++){
-            int pair = i == size ? 0 : i+1;
+            int pair = i == size-1 ? 0 : i+1;
             //we want to make sure there would be a sol'n
             //namely the path between k-1, k, k+1 for all k in {0..size}
             formEdge(i,pair);

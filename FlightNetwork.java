@@ -18,6 +18,9 @@ public class FlightNetwork {
       p[0][4] = 100;
       USC TEST = new USC(5, p);
       TEST.userInput(0, 3);
+      System.out.println();
+      RandomMapGenerator map = new RandomMapGenerator(10000);
+      System.out.println(map);
    } 
 
    public static void AlgorithmAforFlightNetwork(ArrayList<LinkedList<Node>> FlightMap, Node ini, Node fin){
