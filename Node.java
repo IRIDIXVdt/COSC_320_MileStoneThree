@@ -8,6 +8,10 @@ public class Node implements Comparable<Node>{
 	public String path;
 	public double x1,x2,x3;//xi should be the coefficients for each costs 
 	
+	public Node(int nodeIndex, double monetaryCost, double waitTimeCost, double flightTimeCost){
+		this(nodeIndex,monetaryCost,waitTimeCost,flightTimeCost,"");
+	}
+
 	public Node(int nodeIndex, double monetaryCost, double waitTimeCost, double flightTimeCost, String path){
 	//we would use this constructor for most of the time
 		this.nodeIndex = nodeIndex;
@@ -18,6 +22,10 @@ public class Node implements Comparable<Node>{
 		setX1(1);
 		setX2(0);
 		setX3(0);
+	}
+
+	public int getIndex(){
+		return nodeIndex;
 	}
 
 	public double getCost(){
