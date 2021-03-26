@@ -10,20 +10,28 @@ public class RandomMapGenerator {
         PathCostGraph = new LinkedList[size];
         for(int i = 0 ; i< size ; i++)//now we initialize an array of linkedlists
             PathCostGraph[i] = new LinkedList<Node>();
-        for(int i = 0; i< size; i++){
             PathCostGraph[i].add(getRandomCostNode(i,80,0,0));
+        for(int i = 0; i< size; i++){
+            int pair = i == size ? 0 : i+1;
+            //we want to make sure there would be a sol'n
+            //namely the path between k-1, k, k+1 for all k in {0..size}
+            formEdge(i,pair);
+            //and three random edges
+            for(int j = 0; j<3; j++)
+                formEdge(i,(int)(Math.random()*size));
         }//so the head of each linkedlist represents a city, the rest illustrate the available path
-        
+
     }
 
-    public void formEdge(Node node1, Node node2){
+    public void formEdge(int index1, int index2){
         //notice that there is at MOST one undirect edge between two nodes
-        //we will make sure that this holds using the following for loop
-        for(Node i: PathCostGraph[node1.getIndex()])
-            if(i.getIndex() == node2.getIndex())
+        //and there would be no loop (it would be awkward if it does)
+        //so we will make sure that it holds using the following for loop
+        for(Node i: PathCostGraph[index1])
+            if(i.getIndex() == index2)
                 return;
-        PathCostGraph[node1.getIndex()].add(grcS(node2.getIndex()));
-        PathCostGraph[node2.getIndex()].add(grcS(node1.getIndex()));
+        PathCostGraph[index1].add(grcS(index2));
+        PathCostGraph[index2].add(grcS(index1));
     }
 
     public Node getRandomCostNode(int index, int range1, int range2, int range3){//we generate a random cost node
